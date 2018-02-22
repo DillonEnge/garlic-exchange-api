@@ -1,8 +1,9 @@
 # server.py
 from flask import Flask, render_template
-
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
+CORS(app)
 
 import random, requests
 
@@ -11,7 +12,6 @@ def get_hello():
   return random.choice(greeting_list)
 
 @app.route("/price/<coin>")
-@cross_origin()
 def price(coin):
     response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
     return str(response.json()[coin])
@@ -21,7 +21,6 @@ def index():
     return render_template("index.html")
 
 @app.route("/hello")
-@cross_origin()
 def hello():
     return get_hello()
 
