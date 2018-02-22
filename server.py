@@ -1,4 +1,6 @@
 # server.py
+import os, random, requests
+
 from flask import Flask, render_template
 from flask_cors import CORS
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -7,8 +9,6 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
-
-import random, requests
 
 def get_hello():
   greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej']
