@@ -22,6 +22,14 @@ class User(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
 
+def addToDB(obj):
+    db.session.add(obj)
+    db.session.commit()
+
+def deleteFromDB(obj):
+    db.session.delete(obj)
+    db.session.commit()
+
 def get_hello():
   greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej']
   return random.choice(greeting_list)
@@ -35,9 +43,11 @@ def price(coin):
 def createUser():
     try:
         name = request.form['name']
-        print(name)
+        email = request.form['email']
+        user = User(name, email)
+        addToDB(user)
     except:
-        print('name attr not found.')
+        print('An attribute was not found.')
 
     return 'success'
 
