@@ -45,9 +45,11 @@ def createUser():
         name = request.form['name']
         email = request.form['email']
         user = User(name, email)
+        print(user)
         addToDB(user)
     except:
         print('An attribute was not found.')
+        return 'failure'
 
     return 'success'
 
