@@ -33,8 +33,12 @@ def price(coin):
 
 @app.route("/create/user", methods = ['POST'])
 def createUser():
-    if 'name' in request.form.values()
-    print(request.form.values['name'])
+    try:
+        name = request.form['name']
+        print(name)
+    except:
+        print('name attr not found.')
+
     return 'success'
 
 @app.route("/")
