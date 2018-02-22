@@ -34,6 +34,7 @@ def price(coin):
 @app.route("/create/user", methods = ['POST'])
 def createUser():
     print(request.form)
+    return 'good stuff'
 
 @app.route("/")
 def index():
