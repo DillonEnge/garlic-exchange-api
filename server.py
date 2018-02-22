@@ -7,13 +7,13 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 import random, requests
 
 def get_hello():
-  greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej', 'こんにちは']
+  greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej']
   return random.choice(greeting_list)
 
-@app.route("/price")
-def price():
-    response = requests.get('https://garli.co.in/ext/summary')
-    return str(response.json()['data'][0]['lastUsdPrice'])
+@app.route("/price/<coin>")
+def price(coin):
+    response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
+    return str(response.json()[coin])
 
 @app.route("/")
 def index():
