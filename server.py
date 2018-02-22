@@ -3,7 +3,7 @@ import os, random, requests
 
 from flask import Flask, render_template
 from flask_cors import CORS
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 CORS(app)
