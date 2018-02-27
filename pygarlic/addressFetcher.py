@@ -1,4 +1,4 @@
-from pybitcoin import BitcoinPrivateKey
+from .pybitcoin import BitcoinPrivateKey
 
 class GarlicoinPrivateKey(BitcoinPrivateKey):
     _pubkeyhash_version_byte = 38

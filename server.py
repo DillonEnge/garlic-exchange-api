@@ -11,7 +11,6 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
-db.create_all()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -63,8 +62,8 @@ def address(tx):
         gAddress = addressFetcher.generateGarlicAddress(True)
         wallet = Wallets(tx=tx, public=gAddress[0], private=gAddress[1])
         addToDB(wallet)
-    except:
-        return 'Failure'
+    except e:
+        return "Unexpected error"
 
     return 'Success'
 
@@ -74,7 +73,7 @@ def getAddress(tx):
         transaction = Wallets.query.filter_by(tx=tx).first()
         return transaction
     except:
-        return 'Failure'
+        return 'Unexpected error'
 
 @app.route("/create/user", methods = ['POST'])
 def createUser():
