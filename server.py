@@ -1,6 +1,7 @@
 # server.py
 import os, random, requests
 
+from pygarlic import addressFetcher
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -10,6 +11,7 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+db.create_all()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,6 +24,21 @@ class User(db.Model):
 
     def __repr__(self):
         return '<Name %r>' % self.name
+
+class Wallets(db.Model):
+    __tablename__ = "Wallets"
+    id = db.Column(db.Integer, primary_key=True)
+    tx = db.Column(db.Integer, unique=True)
+    public = db.Column(db.String(60))
+    private = db.Column(db.String(120), unique=True)
+
+    def __init__(self, tx, public, private):
+        self.tx = tx
+        self.public = public
+        self.private = private
+
+    def __repr__(self):
+        return '<Tx %s, Public %r>' % (self.tx, self.public)
 
 def addToDB(obj):
     db.session.add(obj)
@@ -39,6 +56,25 @@ def get_hello():
 def price(coin):
     response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
     return str(response.json()[coin])
+
+@app.route("/transaction/<tx>")
+def address(tx):
+    try:
+        gAddress = addressFetcher.generateGarlicAddress(True)
+        wallet = Wallets(tx=tx, gAddress[0], gAddress[1])
+        addToDB(wallet)
+    except:
+        return 'Failure'
+
+    return 'Success'
+
+@app.route("/get/transaction/<tx>")
+def getAddress(tx):
+    try:
+        transaction = Wallets.query.filter_by(tx=tx).first()
+        return transaction
+    except:
+        return 'Failure'
 
 @app.route("/create/user", methods = ['POST'])
 def createUser():
