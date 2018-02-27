@@ -49,7 +49,7 @@ def get_unspents(address, blockchain_client=BlockchainInfoClient()):
     r = requests.get(url, auth=auth)
     try:
         unspents = r.json()["unspent_outputs"]
-    except ValueError, e:
+    except ValueError as e:
         raise Exception('Invalid response from blockchain.info.')
     
     return format_unspents(unspents)
