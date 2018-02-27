@@ -1,5 +1,5 @@
 # server.py
-import os, random, requests
+import os, random, requests, addressFetcher
 
 from flask import Flask, render_template, request
 from flask_cors import CORS
@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -34,7 +35,7 @@ def get_hello():
   greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej']
   return random.choice(greeting_list)
 
-@app.route("/price/<coin>")
+@app.route("/price?coin=<coin>")
 def price(coin):
     response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
     return str(response.json()[coin])
