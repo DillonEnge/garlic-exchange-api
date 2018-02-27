@@ -56,7 +56,7 @@ def price(coin):
     response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
     return str(response.json()[coin])
 
-@app.route("/transaction/<tx>")
+@app.route("/transaction/<int:tx>")
 def address(tx):
     try:
         gAddress = addressFetcher.generateGarlicAddress(True)
@@ -67,7 +67,7 @@ def address(tx):
 
     return 'Success'
 
-@app.route("/get/transaction/<tx>")
+@app.route("/get/transaction/<int:tx>")
 def getAddress(tx):
     try:
         transaction = Wallets.query.filter_by(tx=tx).first()
