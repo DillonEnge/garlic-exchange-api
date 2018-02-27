@@ -61,7 +61,7 @@ def price(coin):
 def address(tx):
     try:
         gAddress = addressFetcher.generateGarlicAddress(True)
-        wallet = Wallets(tx=tx, gAddress[0], gAddress[1])
+        wallet = Wallets(tx=tx, public=gAddress[0], private=gAddress[1])
         addToDB(wallet)
     except:
         return 'Failure'
