@@ -20,5 +20,5 @@ ecdsa>=0.13
 commontools==0.1.0
 utilitybelt>=0.2.1
 python-bitcoinrpc==0.1
--e git://github.com/DillonEnge/keychain-manager-py.git#egg=keychain
+-e git://github.com/DillonEnge/keychain-manager-py.git#egg=keychain-0.14.2.1
 bitcoin>=1.1.42
