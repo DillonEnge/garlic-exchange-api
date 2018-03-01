@@ -60,7 +60,7 @@ def price():
 @app.route("/transaction/<int:tx>")
 def address(tx):
     try:
-        gAddress = AddressFetcher.generateGarlicAddress(True)
+        gAddress = AddressFetcher().generateGarlicAddress(True)
         print(gAddress[0])
         print(gAddress[1])
         wallet = Wallets(tx=tx, public=gAddress[0], private=gAddress[1])
