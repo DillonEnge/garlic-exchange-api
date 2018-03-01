@@ -1,7 +1,7 @@
 # server.py
 import os, random, requests
 
-from pybitcoin import addressFetcher
+from pybitcoin import AddressFetcher
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -60,7 +60,7 @@ def price(coin):
 @app.route("/transaction/<int:tx>")
 def address(tx):
     try:
-        gAddress = addressFetcher.generateGarlicAddress(True)
+        gAddress = AddressFetcher.generateGarlicAddress(True)
         wallet = Wallets(tx=tx, public=gAddress[0], private=gAddress[1])
         addToDB(wallet)
     except e:
