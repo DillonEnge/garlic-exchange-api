@@ -22,4 +22,5 @@ utilitybelt>=0.2.1
 python-bitcoinrpc==0.1
 -e git://github.com/DillonEnge/keylib-py.git@master#egg=keylib-0.1.2
 -e git://github.com/DillonEnge/keychain-manager-py.git@master#egg=keychain-0.14.2.1
+-e git://github.com/DillonEnge/pybitcoin.git@master#egg=pybitcoin-0.9.9
 bitcoin>=1.1.42
