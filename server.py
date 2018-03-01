@@ -75,7 +75,7 @@ def address(tx):
 def getAddress(tx):
     try:
         transaction = Wallets.query.filter_by(tx=tx).first()
-        return transaction
+        return str(transaction)
     except:
         return 'Unexpected error'
 
