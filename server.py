@@ -63,7 +63,7 @@ def address(tx):
         gAddress = AddressFetcher.generateGarlicAddress(True)
         wallet = Wallets(tx=tx, public=gAddress[0], private=gAddress[1])
         addToDB(wallet)
-    except e:
+    except:
         return "Unexpected error"
 
     return 'Success'
