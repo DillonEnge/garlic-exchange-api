@@ -1,7 +1,7 @@
 # server.py
 import os, random, requests
 
-from pygarlic import addressFetcher
+from pybitcoin import addressFetcher
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
