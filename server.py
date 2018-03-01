@@ -52,8 +52,9 @@ def get_hello():
   greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej']
   return random.choice(greeting_list)
 
-@app.route("/price?coin=<coin>")
-def price(coin):
+@app.route("/price")
+def price():
+    coin = request.args.get('coin', 'USD')
     response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
     return str(response.json()[coin])
 
