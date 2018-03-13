@@ -77,15 +77,22 @@ def require_appkey(view_function):
             abort(401)
     return decorated_function
 
-@app.route("/price", methods=['GET'])
-def price():
+@app.route("/get/price", methods=['GET'])
+def get_price():
     coin = request.args.get('coin', 'USD')
     response = requests.get('https://min-api.cryptocompare.com/data/price?fsym=GRLC&tsyms=' + coin)
     return str(response.json()[coin])
 
+
+@app.route("/get/bank_balance", methods=['GET'])
+def get_bank_balance():
+    address = 'GT7gGjmVhh1cKn1oH8HRSRFz61PNTSjfN9'
+    response = requests.get('https://garli.co.in/ext/getbalance/' + address)
+    return str(response.json())
+
 @app.route("/create/address", methods=['POST'])
 @require_appkey
-def createAddress():
+def create_address():
     try:
         tx = request.form['tx']
         gAddress = AddressFetcher().generateGarlicAddress(True)
@@ -98,7 +105,7 @@ def createAddress():
 
 @app.route("/delete/address", methods=['DELETE'])
 @require_appkey
-def deleteAddress():
+def delete_address():
     try:
         tx = request.form['tx']
         wallet = Wallets.query.filter_by(tx=tx).first()
@@ -109,7 +116,7 @@ def deleteAddress():
     return 'Success'
 
 @app.route("/get/address/<int:tx>", methods=['GET'])
-def getAddress(tx):
+def get_address(tx):
     try:
         address = Wallets.query.filter_by(tx=tx).first()
         if not address:
@@ -120,7 +127,7 @@ def getAddress(tx):
 
 @app.route("/create/user", methods = ['POST'])
 @require_appkey
-def createUser():
+def create_user():
     try:
         name = request.form['name']
         email = request.form['email']
