@@ -1,7 +1,6 @@
 # server.py
 import os, random, requests
 import base64, hashlib
-from plumbum import FG, BG
 from pybitcoin import AddressFetcher
 from functools import wraps
 from flask import Flask, render_template, request, abort
@@ -60,7 +59,8 @@ def deleteFromDB(obj):
     db.session.commit()
 
 def startGarlicProcess():
-    (./bin/garlicoind | grep["\\.py"]) & BG
+    cmd = 'bin/garlicoind'
+    print(os.system(cmd)) # returns the exit status
 
 def get_hello():
   greeting_list = ['Ciao', 'Hei', 'Salut', 'Hola', 'Hallo', 'Hej']
