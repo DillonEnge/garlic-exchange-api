@@ -1,0 +1,11 @@
+prefix=/home/travis/build/GarlicoinOrg/Garlicoin/depends/x86_64-unknown-linux-gnu
+exec_prefix=${prefix}
+libdir=/home/travis/build/GarlicoinOrg/Garlicoin/out/false/48.5-x86_64-unknown-linux-gnu/lib
+includedir=${prefix}/include
+
+Name: Garlicoin Core consensus library
+Description: Library for the Bitcoin consensus protocol.
+Version: 0.16.0
+Libs: -L${libdir} -lbitcoinconsensus
+Cflags: -I${includedir}
+Requires.private: libcrypto

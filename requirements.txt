@@ -19,6 +19,7 @@ Werkzeug==0.14.1
 ecdsa>=0.13
 commontools==0.1.0
 utilitybelt>=0.2.1
+plumbum==1.6.6
 python-bitcoinrpc==0.1
 -e git://github.com/DillonEnge/keylib-py.git@master#egg=keylib-0.1.2
 -e git://github.com/DillonEnge/keychain-manager-py.git@master#egg=keychain-0.14.2.1
