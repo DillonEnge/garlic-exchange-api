@@ -14,7 +14,7 @@ psycopg2-binary==2.7.4
 requests==2.18.4
 six==1.11.0
 SQLAlchemy==1.2.3
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.14.1
 ecdsa>=0.13
 commontools==0.1.0
